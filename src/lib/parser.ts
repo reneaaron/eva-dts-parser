@@ -46,7 +46,5 @@ export default function parseEvaDtsFile(content: string): Products {
     }
   }
 
-  console.log(products);
-
   return products;
 }
