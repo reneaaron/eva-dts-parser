@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import { ChangeEvent, useState } from "react"
 import parseEvaDtsFile from "@/lib/parser";
 import { mkConfig, generateCsv, download } from "export-to-csv";
@@ -16,12 +15,16 @@ function App() {
     fieldSeparator: ',',
     quoteStrings: true,
     decimalSeparator: '.',
-    showColumnHeaders: true,
-    showTitle: false,
     title: 'Products',
     useTextFile: false,
     useBom: true,
-    useKeysAsHeaders: true,
+    columnHeaders: [
+      { key: "id", displayLabel: "Fach"},
+      { key: "price", displayLabel: "Einzelpreis" },
+      { key: "valueOfSales", displayLabel: "Umsatz" },
+      { key: "numberOfSales", displayLabel: "Anzahl Verkäufe" },
+      
+    ],
   });
 
   function handleFileChanged(event: ChangeEvent<HTMLInputElement>): void {
