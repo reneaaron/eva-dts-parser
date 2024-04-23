@@ -40,10 +40,12 @@ function App() {
     setLoading(true);
     const reader = new FileReader();
 
-    reader.onload = (e) => {
-      const content = e.target.result
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      if(!e.target || !e.target.result) return;
+
+      const content = e.target.result as string;
       const result = parseEvaDtsFile(content);
-      const csv = generateCsv(csvConfig)(result);
+      const csv = generateCsv(csvConfig)(result as any);
       download(csvConfig)(csv);
 
       setTimeout(() => {

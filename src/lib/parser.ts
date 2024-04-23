@@ -1,13 +1,3 @@
-interface Segment {
-  type: string;
-  values: (string | number)[];
-}
-
-interface Transaction {
-  type?: string; // Optional type for better classification
-  records: Segment[];
-}
-
 interface Product {
     id: string;
     price: number;
@@ -16,7 +6,6 @@ interface Product {
 }
 
 type Products = Product[];
-type Transactions = Transaction[];
 
 export default function parseEvaDtsFile(content: string): Products {
   const products: Products = [];
