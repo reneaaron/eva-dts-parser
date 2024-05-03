@@ -25,8 +25,6 @@ export default function parseEvaDtsFile(content: string): ParseResult {
   const paymentMethods: PaymentMethods = [];
   const lines = content.split("\n");
   let currentProduct: Product = null!;
-  let currentPaymentMethod: PaymentMethod = null!;
-
 
   for (let line of lines) {
     if (line.trim() === "") continue; // Skip empty lines
