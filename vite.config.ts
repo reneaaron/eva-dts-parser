@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/eva-dts-parser/",
+  base: "/",
   plugins: [react()],
   resolve: {
     alias: {

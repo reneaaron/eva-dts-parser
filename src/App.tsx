@@ -54,6 +54,18 @@ function App() {
     return new Intl.NumberFormat("de-AT", { style: "currency", currency: currency }).format(value);
   }
 
+  function formatDate(dateString: string) {
+    const year = dateString.substr(0, 4);
+    const month = dateString.substr(4, 2);
+    const day = dateString.substr(6, 2);
+    const hours = dateString.substr(9, 2);
+    const minutes = dateString.substr(11, 2);
+    const seconds = dateString.substr(13, 2);
+
+    const date = new Date(`${year}-${month}-${day}T${hours}:${minutes}:${seconds}`);
+    return date.toLocaleString("de-DE");
+  }
+
   return (
     <>
       <Toaster />
@@ -73,8 +85,20 @@ function App() {
               <div className="flex flex-col">
                 <h1 className="text-xl font-medium">Auswertung</h1>
                 <p className="text-sm text-muted-foreground">Seit dem letzten Zurücksetzen der Verkaufsstatistiken</p></div>
-              <Button variant={"secondary"} onClick={() => { setResult(null); setFile(null); }}>Neue Auswertung starten</Button>
+              <Button variant="secondary" onClick={() => { setResult(null); setFile(null); }}>Neue Auswertung starten</Button>
             </div>
+            
+            {result.date && 
+              <Table className="mb-10 w-full">
+                <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium">Auslesedatum</TableCell>
+                      <TableCell className="text-right">{formatDate(result.date)}</TableCell>
+                    </TableRow>
+                </TableBody>
+              </Table>
+            }
+
             <Table className="mb-10 w-full">
               <TableHeader>
                 <TableRow>

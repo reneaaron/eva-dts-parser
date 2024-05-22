@@ -17,6 +17,7 @@ export type ParseResult = {
   products: Products;
   paymentMethods: PaymentMethods;
   currencyNumber: number;
+  date: string;
 };
 
 export default function parseEvaDtsFile(content: string): ParseResult {
@@ -25,6 +26,7 @@ export default function parseEvaDtsFile(content: string): ParseResult {
   const paymentMethods: PaymentMethods = [];
   const lines = content.split("\n");
   let currentProduct: Product = null!;
+  let date = "";
 
   for (let line of lines) {
     if (line.trim() === "") continue; // Skip empty lines
@@ -67,11 +69,16 @@ export default function parseEvaDtsFile(content: string): ParseResult {
         valueOfSales: Number(data[2]) / 100,
       });
     }
+
+    if(recordType == "EA3") {
+      date = `${data[1]} ${data[2]}`;
+    }
   }
 
   return {
     products,
     paymentMethods,
-    currencyNumber
+    currencyNumber,
+    date
   };
 }
